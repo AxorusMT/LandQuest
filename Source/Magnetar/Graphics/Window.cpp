@@ -5,8 +5,8 @@ Magnetar::Graphics::Window::Window(const Magnetar::Graphics::WindowProperties& p
     this->properties = properties;
 
     uint32 windowFlags = SDL_WINDOW_SHOWN;
-    uint32 x = this->properties.center_x ? SDL_WINDOWPOS_CENTERED : this->properties.x;
-    uint32 y = this->properties.center_y ? SDL_WINDOWPOS_CENTERED : this->properties.y;
+    uint16 x = this->properties.center_x ? SDL_WINDOWPOS_CENTERED : this->properties.x;
+    uint16 y = this->properties.center_y ? SDL_WINDOWPOS_CENTERED : this->properties.y;
 
     if (this->properties.fullscreen) {
         windowFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -55,9 +55,36 @@ Magnetar::Graphics::WindowProperties Magnetar::Graphics::Window::getProperties()
 }
 
 void Magnetar::Graphics::Window::setProperties(Magnetar::Graphics::WindowProperties& props) {
+    WindowProperties oldProps = this->properties;
     this->properties = props;
 
-    // TODO: Make changing the properties update the window
+    if ((oldProps.width != props.width) || (oldProps.height != props.height)) {
+        SDL_SetWindowSize(window, props.width, props.height);
+    }
+
+    if ((oldProps.x != props.x) || (oldProps.y != props.y) || (oldProps.center_x != props.center_x) || (oldProps.center_y != props.center_y)) {    
+        uint16 x = this->properties.center_x ? SDL_WINDOWPOS_CENTERED : this->properties.x;
+        uint16 y = this->properties.center_y ? SDL_WINDOWPOS_CENTERED : this->properties.y;
+        SDL_SetWindowPosition(window, x, y);
+    }
+
+    if (oldProps.title != props.title) {
+        SDL_SetWindowTitle(window, props.title.c_str());
+    }
+
+    if (oldProps.fullscreen != props.fullscreen) {
+        uint32 fullscreen = props.fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;
+        SDL_SetWindowFullscreen(window, fullscreen);
+    }
+
+    if (oldProps.resizable != props.resizable) {
+        SDL_SetWindowResizable(window, static_cast<SDL_bool>(props.resizable));
+    }
+
+    if (oldProps.borderless != props.borderless) {
+        SDL_SetWindowBordered(window, static_cast<SDL_bool>(props.borderless));
+    }
+
 }
 void Magnetar::Graphics::Window::run() {
     while (this->isRun) {
