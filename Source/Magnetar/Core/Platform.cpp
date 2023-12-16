@@ -1,9 +1,8 @@
 #include "Magnetar/Core/Platform.hpp"
 
-#include "SDL2/SDL.h"
-
-
-constexpr Magnetar::PlatformType Magnetar::Platform::getPlatformType() {
+#include "SDL2/SDL_platform.h"
+ 
+Magnetar::PlatformType Magnetar::Platform::getPlatformType() {
     #ifdef __MACOSX__
         return PlatformType::MacOS;
     #elif  __IPHONEOS__ 
@@ -19,7 +18,7 @@ constexpr Magnetar::PlatformType Magnetar::Platform::getPlatformType() {
     #endif
 }
 
-constexpr std::string Magnetar::Platform::getPlatformString() {
+std::string Magnetar::Platform::getPlatformString() {
     #ifdef __MACOSX__
         return "MacOS"
     #elif  __IPHONEOS__ 
