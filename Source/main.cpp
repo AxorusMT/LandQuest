@@ -4,7 +4,6 @@
 int main() {
     Magnetar::Logger logger(true); 
     
-
-    logger.info(Magnetar::Platform::getPlatformString());
+    logger.fatal("The quick brown fox jumps over the lazy dog!");
     return 0;
 }
