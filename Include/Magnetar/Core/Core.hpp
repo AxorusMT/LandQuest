@@ -10,5 +10,6 @@
 #include <fstream>
 #include <format>
 #include <chrono>
+#include <memory>
 
 #include "Types.hpp"

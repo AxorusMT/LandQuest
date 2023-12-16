@@ -11,6 +11,7 @@
 #include "Magnetar/Core/Logger.hpp"
 #include "Magnetar/Core/Platform.hpp"
 #include "Magnetar/Graphics/Window.hpp"
+#include "Magnetar/Core/Application.hpp"
 
 
 using namespace Magnetar;
@@ -23,7 +24,6 @@ int main() {
     props.width = 1600;
     props.height = 900;
 
-    Graphics::Window win(props);
-    win.run();
+    Application app(props, true);
     return 0;
 }
