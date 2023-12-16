@@ -2,12 +2,14 @@ add_rules("mode.debug", "mode.release")
 set_languages("c++20")
 
 add_requires("fmt")
+add_requires("libsdl")
 add_includedirs("Include")
 
 target("LandQuest")
     set_kind("binary")
     add_files("Source/**.cpp")
     add_packages("fmt")
+    add_packages("libsdl")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

@@ -34,6 +34,11 @@ namespace Magnetar {
         private:
             bool shouldLogToFile = true;
 
+            // May not want these to be const in the future, let users change them in app.
+            const int maximumLogsAllowed = 7;
+            const std::string logOutputDir = "./OutputLogs/";
+
+            void deleteOldestLog();
             // filters
             bool infoEnabled = true;
             bool debugEnabled = true;
