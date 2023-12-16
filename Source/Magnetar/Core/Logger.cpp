@@ -11,6 +11,7 @@ Magnetar::Logger::Logger(bool shouldLogToFile) {
     logFilename = std::format("{}", std::chrono::system_clock::now());
 
     if (this->shouldLogToFile) {
+        [[likely]]
         logFilestream = std::ofstream(logFilename);
     }
 }
@@ -77,8 +78,10 @@ void Magnetar::Logger::info(std::string message, std::source_location location) 
     );
 
     if (infoEnabled) {
+        [[likely]]
         fmt::print(fg(fmt::color::gray), formattedMessage);
         if (shouldLogToFile) {
+            [[likely]]
             logFilestream << formattedMessage;
         }
     }
@@ -94,8 +97,10 @@ void Magnetar::Logger::debug(std::string message, std::source_location location)
     );
 
     if (debugEnabled) {
+        [[likely]]
         fmt::print(fg(fmt::color::blue), formattedMessage);
         if (shouldLogToFile) {
+            [[likely]]
             logFilestream << formattedMessage;
         }
     }
@@ -112,8 +117,10 @@ void Magnetar::Logger::warn(std::string message, std::source_location location) 
     );
 
     if (warnEnabled) {
+        [[likely]]
         fmt::print(fg(fmt::color::yellow), formattedMessage);
         if (shouldLogToFile) {
+            [[likely]]
             logFilestream << formattedMessage;
         }
     }
@@ -130,8 +137,10 @@ void Magnetar::Logger::error(std::string message, std::source_location location)
     );
 
     if (errorEnabled) {
+        [[likely]]
         fmt::print(fg(fmt::color::crimson), formattedMessage);
         if (shouldLogToFile) {
+            [[likely]]
             logFilestream << formattedMessage;
         }
     }
@@ -148,8 +157,10 @@ void Magnetar::Logger::fatal(std::string message, std::source_location location)
     );
 
     if (fatalEnabled) {
+        [[likely]]
         fmt::print(fg(fmt::color::red) | fmt::emphasis::bold, formattedMessage);
         if (shouldLogToFile) {
+            [[likely]]
             logFilestream << formattedMessage;
         }
     }
