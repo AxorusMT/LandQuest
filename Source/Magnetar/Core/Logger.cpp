@@ -6,6 +6,9 @@
 #include <chrono>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
 Magnetar::Logger::Logger(bool shouldLogToFile) {
     this->shouldLogToFile = shouldLogToFile;
@@ -14,12 +17,44 @@ Magnetar::Logger::Logger(bool shouldLogToFile) {
     if (this->shouldLogToFile) {
         [[likely]]
         
-        if (!std::filesystem::exists("./OutputLogs")) {
-            std::filesystem::create_directory("./OutputLogs");
+        // To not flood the filesystem with logs, we only store the 5 most recent logs
+
+        auto logDirectoryIterator = 
+            std::filesystem::directory_iterator(logOutputDir);
+
+        // Count hoow many logs there are
+        int logFileCount = std::count_if(
+            begin(logDirectoryIterator),
+            end(logDirectoryIterator),
+            [](auto& entry) {
+                return entry.is_regular_file();
+            }
+        );
+
+        if (logFileCount == maximumLogsAllowed) {
+            deleteOldestLog();
         }
 
-        logFilestream = std::ofstream("./OutputLogs/" + logFilename);
+        if (!std::filesystem::exists(logOutputDir)) {
+            std::filesystem::create_directory(logOutputDir);
+        }
+
+        logFilestream = std::ofstream(logOutputDir + logFilename);
     }
+}
+
+void Magnetar::Logger::deleteOldestLog() {
+    std::vector<std::filesystem::file_time_type> logTimes;
+
+    auto logDirectoryIterator = std::filesystem::directory_iterator(logOutputDir);
+    for (auto& log : logDirectoryIterator) {
+        logTimes.push_back(log.last_write_time());
+    }
+
+    std::sort(logTimes.begin(), logTimes.end());
+
+    // delete the oldest file
+    std::filesystem::remove(logOutputDir + std::format("{:%Y-%m-%d_%X}.log", logTimes[0]));
 }
 
 Magnetar::Logger::~Logger() {
