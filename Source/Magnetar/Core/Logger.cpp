@@ -5,14 +5,20 @@
 #include <format>
 #include <chrono>
 #include <fstream>
+#include <filesystem>
 
 Magnetar::Logger::Logger(bool shouldLogToFile) {
     this->shouldLogToFile = shouldLogToFile;
-    logFilename = std::format("{}", std::chrono::system_clock::now());
+    logFilename = std::format("{:%Y-%m-%d_%X}.log", std::chrono::system_clock::now());
 
     if (this->shouldLogToFile) {
         [[likely]]
-        logFilestream = std::ofstream(logFilename);
+        
+        if (!std::filesystem::exists("./OutputLogs")) {
+            std::filesystem::create_directory("./OutputLogs");
+        }
+
+        logFilestream = std::ofstream("./OutputLogs/" + logFilename);
     }
 }
 
