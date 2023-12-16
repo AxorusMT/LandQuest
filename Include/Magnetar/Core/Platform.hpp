@@ -15,6 +15,6 @@ namespace Magnetar {
     class Platform {
         public:
             static inline constexpr PlatformType getPlatformType();
-            static constexpr std::string getPlatformString();
+            static inline constexpr std::string getPlatformString();
     };      
 }
