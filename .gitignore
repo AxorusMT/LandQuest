@@ -10,4 +10,5 @@ Plan/
 
 .cache/
 
-
+# Doxygen docs (may unblock later)
+docs/
