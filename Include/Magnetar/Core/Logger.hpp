@@ -1,10 +1,5 @@
 #pragma once
-#include <source_location>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <format>
-#include <chrono>
+#include "Core.hpp"
 // Logger Library
 
 namespace Magnetar {
@@ -35,7 +30,7 @@ namespace Magnetar {
             bool shouldLogToFile = true;
 
             // May not want these to be const in the future, let users change them in app.
-            const int maximumLogsAllowed = 7;
+            const uint8 maximumLogsAllowed = 7;
             const std::string logOutputDir = "./OutputLogs/";
 
             void deleteOldestLog();
