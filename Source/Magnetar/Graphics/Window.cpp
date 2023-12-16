@@ -33,14 +33,10 @@ Magnetar::Graphics::Window::Window(const Magnetar::Graphics::WindowProperties& p
         windowFlags
     );
 
-    Magnetar::Logger log(true);
-
     if (window == nullptr) {
-        log.fatal(std::format("Cannot create SDL2 Window, {}", SDL_GetError()));
         std::exit(EXIT_FAILURE);
     }
 
-    log.info("SDL Window successfully created!");
 }
 
 Magnetar::Graphics::Window::~Window() {
@@ -86,6 +82,7 @@ void Magnetar::Graphics::Window::setProperties(Magnetar::Graphics::WindowPropert
     }
 
 }
+
 void Magnetar::Graphics::Window::run() {
     while (this->isRun) {
         SDL_Event event;
