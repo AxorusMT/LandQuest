@@ -54,6 +54,11 @@ Magnetar::Graphics::WindowProperties Magnetar::Graphics::Window::getProperties()
     return this->properties;
 }
 
+void Magnetar::Graphics::Window::setProperties(Magnetar::Graphics::WindowProperties& props) {
+    this->properties = props;
+
+    // TODO: Make changing the properties update the window
+}
 void Magnetar::Graphics::Window::run() {
     while (this->isRun) {
         SDL_Event event;

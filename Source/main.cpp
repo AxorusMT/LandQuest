@@ -1,3 +1,13 @@
+/**
+ * @mainpage LandQuest 
+ * 
+ * A Open World Exploration Game.
+ * 
+ * Uses the custom **Magnetar** game engine, a high 
+ * performance 2D game engine
+ * 
+ */
+
 #include "Magnetar/Core/Logger.hpp"
 #include "Magnetar/Core/Platform.hpp"
 #include "Magnetar/Graphics/Window.hpp"
