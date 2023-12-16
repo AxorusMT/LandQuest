@@ -8,5 +8,6 @@ build/
 .vscode/
 Plan/
 
+.cache/
 
 
