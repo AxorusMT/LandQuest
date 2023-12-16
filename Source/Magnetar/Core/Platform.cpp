@@ -20,23 +20,17 @@ constexpr Magnetar::PlatformType Magnetar::Platform::getPlatformType() {
 }
 
 constexpr std::string Magnetar::Platform::getPlatformString() {
-    switch (getPlatformType()) {
-        case PlatformType::Windows:
-            return "Windows";
-            break; // unnecessary, but just to be sure
-        case PlatformType::MacOS:
-            return "MacOS";
-            break;
-        case PlatformType::Linux:
-            return "Linux";
-            break;
-        case PlatformType::iOS:
-            return "iOS";
-            break;
-        case PlatformType::Android:
-            return "Android";
-            break;
-        default:
-            return "Unknown";
-    }
+    #ifdef __MACOSX__
+        return "MacOS"
+    #elif  __IPHONEOS__ 
+        return "iOS";
+    #elif __WIN32__ 
+        return "Windows";
+    #elif __LINUX__
+        return "Linux";
+    #elif __ANDROID__
+        return "Android";
+    #else 
+        return "Unknown";
+    #endif
 }
