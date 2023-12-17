@@ -7,6 +7,10 @@
 #include "Magnetar/Graphics/Window.hpp"
 
 namespace Magnetar {
+    /**
+     * @brief A Magnetar Application
+     * @since 0.0.1
+     */
     class Application {
         public:
             Application(uint16 width, uint16 height, std::string title, bool logToFile = true);
