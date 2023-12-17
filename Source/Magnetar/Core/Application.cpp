@@ -1,4 +1,5 @@
 #include "Magnetar/Core/Application.hpp"
+#include "Magnetar/Core/Version.hpp"
 
 Magnetar::Application::Application(uint16 width, uint16 height, std::string name, bool logToFile) {
     this->name = name;
@@ -23,7 +24,12 @@ Magnetar::Application::Application(Graphics::WindowProperties& props, bool logTo
     this->logger = std::make_unique<Logger>(logToFile);
 
     logger->info("Logger created");
-    logger->info(std::format("Magnetar: Platform: {}", Platform::getPlatformString()));
+    logger->info(
+        std::format("Magnetar v{}, Platform = {}", 
+            Version::getString(),
+            Platform::getPlatformString()
+        )       
+    );
 
     setup();
 }
