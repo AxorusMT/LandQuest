@@ -15,7 +15,6 @@ Magnetar::Logger::Logger(bool shouldLogToFile) {
     logFilename = std::format("{:%Y-%m-%d_%X}.log", std::chrono::system_clock::now());
 
     if (this->shouldLogToFile) {
-        [[likely]]
         
         // To not flood the filesystem with logs, we only store the 5 most recent logs
 
