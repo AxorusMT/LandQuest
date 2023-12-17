@@ -13,7 +13,6 @@
 #include "Magnetar/Graphics/Window.hpp"
 #include "Magnetar/Core/Application.hpp"
 
-
 using namespace Magnetar;
 int main() {    
     Graphics::WindowProperties props;
@@ -25,5 +24,6 @@ int main() {
     props.height = 900;
 
     Application app(props, true);
+
     return 0;
 }
