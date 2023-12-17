@@ -110,7 +110,7 @@ namespace Magnetar {
                 void setProperties(WindowProperties& props);
                 //temp
 
-                void run();
+                SDL_Window* getUnderlyingWindow();
             private:
                 WindowProperties properties;
                 SDL_Window* window = nullptr;

@@ -24,6 +24,7 @@ int main() {
     props.height = 900;
 
     Application app(props, true);
+    app.run();
 
     return 0;
 }

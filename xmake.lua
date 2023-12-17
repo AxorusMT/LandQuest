@@ -11,6 +11,7 @@ target("LandQuest")
     add_files("Source/**.cpp")
     add_packages("fmt")
     add_packages("libsdl")
+    add_syslinks("GL")
 
     -- version defines
     add_defines("MAGNETAR_VERSION_MAJOR=0")

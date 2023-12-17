@@ -2,9 +2,20 @@
 #include "Magnetar/Core/Logger.hpp"
 
 Magnetar::Graphics::Window::Window(const Magnetar::Graphics::WindowProperties& properties) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        std::cerr << SDL_GetError() << std::endl;
+        std::exit(EXIT_FAILURE);
+    }   
+    
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
     this->properties = properties;
 
-    uint32 windowFlags = SDL_WINDOW_SHOWN;
+    uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL;
     uint16 x = this->properties.center_x ? SDL_WINDOWPOS_CENTERED : this->properties.x;
     uint16 y = this->properties.center_y ? SDL_WINDOWPOS_CENTERED : this->properties.y;
 
@@ -36,6 +47,9 @@ Magnetar::Graphics::Window::Window(const Magnetar::Graphics::WindowProperties& p
     if (window == nullptr) {
         std::exit(EXIT_FAILURE);
     }
+
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+    SDL_GL_MakeCurrent(window, context);
 
 }
 
@@ -83,19 +97,7 @@ void Magnetar::Graphics::Window::setProperties(Magnetar::Graphics::WindowPropert
 
 }
 
-void Magnetar::Graphics::Window::run() {
-    while (this->isRun) {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                isRun = false;
-            }
-
-            if (event.type == SDL_KEYDOWN) {
-                if (event.key.keysym.sym == SDLK_ESCAPE) {
-                    isRun = false;
-                }
-            }
-        }
-    }
+SDL_Window* Magnetar::Graphics::Window::getUnderlyingWindow() {
+    return this->window;
 }
+
