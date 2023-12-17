@@ -10,6 +10,12 @@ target("LandQuest")
     add_files("Source/**.cpp")
     add_packages("fmt")
     add_packages("libsdl")
+
+    -- version defines
+    add_defines("MAGNETAR_VERSION_MAJOR=0")
+    add_defines("MAGNETAR_VERSION_MINOR=0")
+    add_defines("MAGNETAR_VERSION_PATCH=1")
+    add_defines("MAGNETAR_VERSION_LETTER='a'")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

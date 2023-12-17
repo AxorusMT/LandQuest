@@ -22,8 +22,8 @@ Magnetar::Logger::Logger(bool shouldLogToFile) {
         auto logDirectoryIterator = 
             std::filesystem::directory_iterator(logOutputDir);
 
-        // Count hoow many logs there are
-        int logFileCount = std::count_if(
+        // Count how many logs there are
+        uint16 logFileCount = std::count_if(
             begin(logDirectoryIterator),
             end(logDirectoryIterator),
             [](auto& entry) {
