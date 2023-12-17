@@ -4,6 +4,7 @@ set_languages("c++20")
 add_requires("fmt")
 add_requires("libsdl")
 add_includedirs("Include")
+add_includedirs("Vendor/Include")
 
 target("LandQuest")
     set_kind("binary")
