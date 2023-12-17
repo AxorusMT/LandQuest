@@ -12,3 +12,5 @@ Plan/
 
 # Doxygen docs (may unblock later)
 docs/
+
+compile_commands.json
